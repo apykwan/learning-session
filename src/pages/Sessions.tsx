@@ -19,7 +19,7 @@ export default function SessionsPage() {
             id={session.id} 
             image={session.image} 
             title={session.title} 
-            description={session.description} 
+            summary={session.summary} 
           />
         ))}
       </div>

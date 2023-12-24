@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
+import Button from './UI/Button';
+
 export default function Header() {
   return (
     <div id="main-header">
@@ -13,9 +15,10 @@ export default function Header() {
             <NavLink to="/sessions">Browse Sessions</NavLink>
           </li>
           <li>
-            <NavLink to="/error">Upcoming Sessions</NavLink>
+             <Button>Upcoming Sessions</Button>
           </li>
        </ul>
+      
       </nav>
     </div>
   )
