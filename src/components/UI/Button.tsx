@@ -5,7 +5,7 @@ import { type ComponentPropsWithoutRef } from 'react';
 
 type BaseProps = {
   children: ReactNode;
-  textOnly: boolean;
+  textOnly?: boolean;
 }
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & BaseProps & {
@@ -22,15 +22,16 @@ function isButtonOrLink(props: ButtonProps | LinkProps): props is LinkProps {
 }
 
 export default function Button(props: ButtonProps | LinkProps) {
-  const { children, textOnly, ...otherProps} = props;
   if (isButtonOrLink(props)) {
+    const { children, textOnly, ...otherProps} = props;
     return (
-      <Link className={`button ${textOnly ? 'button--text-only' : ''}`} {...props}>
+      <Link className={`button ${textOnly ? 'button--text-only' : ''}`} {...otherProps}>
         {children}
       </Link>
     );
   }
 
+  const { children, textOnly, ...otherProps} = props;
   return (
     <button className={`button ${textOnly ? 'button--text-only' : ''}`} {...otherProps}>
       {children}

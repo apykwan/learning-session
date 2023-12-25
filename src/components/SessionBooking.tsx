@@ -1,27 +1,19 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, type FormEvent } from 'react';
 
 import Input from './UI/Input';
 import Button from './UI/Button';
 import Modal, { ModalHandle } from './UI/Modal';
-
-type SessionType = {
-  id: string;
-  title: string;
-  summary: string;
-  description: string;
-  date: string;
-  duration: number;
-  image: string;
-}
+import { useSessionDispatch } from '../store/hooks';
+import { regSession, SessionType } from '../store/sessionSlice';
 
 interface SessionBookingProps {
   onDone: () => void;
   session: SessionType;
 }
 
-
 export default function SessionBooking({ onDone, session }: SessionBookingProps) {
   const modal = useRef<ModalHandle>(null);
+  const dispatch = useSessionDispatch();
 
   useEffect(() => {
     if (modal.current) {
@@ -33,6 +25,8 @@ export default function SessionBooking({ onDone, session }: SessionBookingProps)
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
+    console.log(formData);
+    dispatch(regSession(session));
     onDone();
   }
 
